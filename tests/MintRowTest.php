@@ -22,7 +22,7 @@ final class MintRowTest extends TestCase
     public function testSpliceAndScaleForNeuralNetwork(): void
     {
         $row = new MintRow(explode(',', self::ROW));
-        $pixels = $row->spliceAndScaleForNeuralNetwork();
+        $pixels = $row->getInputData();
         $this->assertCount(784, $pixels);
         $this->assertIsFloat($pixels[0]);
         foreach ($pixels as $pixel) {

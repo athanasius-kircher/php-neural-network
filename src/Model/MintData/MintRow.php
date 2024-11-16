@@ -24,10 +24,18 @@ final class MintRow
         return $pixels;
     }
 
-    public function spliceAndScaleForNeuralNetwork(): array
+    public function getInputData(): array
     {
         $pixels = array_slice($this->row, 1);
 
         return array_map(fn($pixel) => (int)$pixel / 255 * 0.99 + 0.01, $pixels);
+    }
+
+    public function getTargetOutputData(): array
+    {
+        $target = array_fill(0, 10, 0.01);
+        $target[(int)$this->row[0]] = 0.99;
+
+        return $target;
     }
 }
