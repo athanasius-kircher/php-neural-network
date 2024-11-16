@@ -41,6 +41,15 @@ final class NeuralNetwork
         );
     }
 
+    public static function createWithMatrices(Matrix $inputToHiddenMatrix, Matrix $hiddenToOutputMatrix, float $learningRate)
+    {
+        return new self(
+            $inputToHiddenMatrix,
+            $hiddenToOutputMatrix,
+            $learningRate
+        );
+    }
+
     public function train(Vector $input, Vector $targetOutput): void
     {
         $hiddenWeightedInput = $this->inputToHiddenMatrix->multiplyVector($input);
@@ -86,5 +95,20 @@ final class NeuralNetwork
         $outputWeightedInput = $this->hiddenToOutputMatrix->multiplyVector($hiddenOutput);
 
         return $outputWeightedInput->sigmoid();
+    }
+
+    public function getHiddenToOutputMatrix(): Matrix
+    {
+        return $this->hiddenToOutputMatrix;
+    }
+
+    public function getInputToHiddenMatrix(): Matrix
+    {
+        return $this->inputToHiddenMatrix;
+    }
+
+    public function getLearningRate(): float
+    {
+        return $this->learningRate;
     }
 }
