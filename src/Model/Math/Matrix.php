@@ -66,4 +66,19 @@ final readonly class Matrix
     {
         return $this->matrix;
     }
+
+    public function get(int $row, int $column): float
+    {
+        return $this->matrix[$row][$column];
+    }
+
+    public function __toString(): string
+    {
+        $output = '';
+        foreach ($this->matrix as $row) {
+            $output .= implode('|', $row) . PHP_EOL;
+        }
+
+        return $output;
+    }
 }

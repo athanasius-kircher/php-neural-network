@@ -69,4 +69,14 @@ final readonly class Vector
 
         return new Vector($result);
     }
+
+    public function get(int $index): float
+    {
+        return $this->vector[$index];
+    }
+
+    public function __toString(): string
+    {
+        return implode('|', $this->vector);
+    }
 }
