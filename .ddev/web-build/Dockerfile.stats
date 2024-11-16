@@ -1,0 +1,15 @@
+ENV extension=stats
+ENV extension_repo=https://github.com/php/pecl-math-stats
+
+RUN (apt-get update || true) && DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confnew" --no-install-recommends --no-install-suggests autoconf build-essential libc-dev php-pear php${DDEV_PHP_VERSION}-dev pkg-config zlib1g-dev
+RUN mkdir -p /tmp/php-${extension} && cd /tmp/php-${extension} && git clone ${extension_repo} .
+WORKDIR /tmp/php-${extension}
+RUN git checkout master
+RUN pwd
+RUN phpize
+RUN ./configure
+RUN make install
+RUN echo "extension=${extension}.so" > /etc/php/${DDEV_PHP_VERSION}/mods-available/${extension}.ini
+RUN ln -s /etc/php/${DDEV_PHP_VERSION}/mods-available/${extension}.ini /etc/php/${DDEV_PHP_VERSION}/cli/conf.d/30-${extension}.ini
+RUN ln -s /etc/php/${DDEV_PHP_VERSION}/mods-available/${extension}.ini /etc/php/${DDEV_PHP_VERSION}/fpm/conf.d/30-${extension}.ini
+RUN ln -s /etc/php/${DDEV_PHP_VERSION}/mods-available/${extension}.ini /etc/php/${DDEV_PHP_VERSION}/phpdbg/conf.d/30-${extension}.ini
