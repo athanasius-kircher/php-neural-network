@@ -85,15 +85,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
     </include_path>
   </component>
-  <component name="PhpProjectServersManager">
-    <servers>
-      <server host=" my-neural-network-php.ddev.site" id="59fddd83-23c8-4df5-99f9-0e40bb8c69db" name="my-neural-network-php.ddev.site" use_path_mappings="true">
-        <path_mappings>
-          <mapping local-root="$PROJECT_DIR$" remote-root="/var/www/html" />
-        </path_mappings>
-      </server>
-    </servers>
-  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />

@@ -16,12 +16,15 @@ final class Csv implements ProviderInterface
     public function getDataIterator(): \Iterator
     {
         $this->openFile();
+
         $data = fgetcsv($this->file);
 
         while (false !== $data) {
             yield $data;
             $data = fgetcsv($this->file);
         }
+        fclose($this->file);
+        $this->file = null;
     }
 
     private function openFile(): void

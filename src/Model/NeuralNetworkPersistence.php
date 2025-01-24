@@ -4,7 +4,7 @@ namespace App\Model;
 
 interface NeuralNetworkPersistence
 {
-    public function save(NeuralNetwork $neuralNetwork): void;
+    public function save(NeuralNetwork $neuralNetwork, string $ident): void;
 
     public function load(string $ident): NeuralNetwork;
 

@@ -15,9 +15,8 @@ final class NeuralNetworkAPCuPersistence implements NeuralNetworkPersistence
     {
     }
 
-    public function save(NeuralNetwork $neuralNetwork): void
+    public function save(NeuralNetwork $neuralNetwork, string $ident): void
     {
-        $ident = date('Y-m-d-H-i-s');
         $data = [
             'inputToHiddenMatrix' => $neuralNetwork->getInputToHiddenMatrix()->toArray(),
             'hiddenToOutputMatrix' => $neuralNetwork->getHiddenToOutputMatrix()->toArray(),
@@ -34,6 +33,7 @@ final class NeuralNetworkAPCuPersistence implements NeuralNetworkPersistence
         $item = $this->nnPersistenceCache->getItem('nn');
         $list = $item->isHit() ? $item->get() : [];
         $list[] = $ident;
+        $list = array_unique($list);
         $item->set($list);
         $this->nnPersistenceCache->save($item);
     }

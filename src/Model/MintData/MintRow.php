@@ -38,4 +38,9 @@ final class MintRow
 
         return $target;
     }
+
+    public function getTargetValue(): int
+    {
+        return (int)$this->row[0];
+    }
 }

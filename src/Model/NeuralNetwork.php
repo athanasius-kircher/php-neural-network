@@ -73,7 +73,11 @@ final class NeuralNetwork
                 $hiddenOutput->transpose()
             )->multiplyScalar($this->learningRate);
 
-        $this->hiddenToOutputMatrix->add($change);
+        $this->hiddenToOutputMatrix = $this->hiddenToOutputMatrix->add($change);
+
+        $vectorOfOne = new Vector(
+            array_fill(0, $hiddenOutput->length, 1)
+        );
 
         $change = $hiddenErrors
             ->hadamardProduct($hiddenOutput)
@@ -83,7 +87,7 @@ final class NeuralNetwork
                 $input->transpose()
             )->multiplyScalar($this->learningRate);
 
-        $this->inputToHiddenMatrix->add($change);
+        $this->inputToHiddenMatrix = $this->inputToHiddenMatrix->add($change);
 
     }
 
